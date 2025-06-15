@@ -1,71 +1,107 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nihalé Protocol</title>
+  <title>Nihalé</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
-      background: radial-gradient(ellipse at center, #000 0%, #111 100%);
+      padding: 0;
+      background: black;
       color: white;
+      font-family: 'Orbitron', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       text-align: center;
-      overflow: hidden;
     }
-    .lang-toggle {
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2em;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .language-switch {
       position: absolute;
       top: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
+    }
+    .language-switch button {
+      background: none;
+      border: 1px solid white;
       color: white;
-      padding: 10px;
+      padding: 5px 10px;
+      font-family: inherit;
       cursor: pointer;
     }
-    .fade-in {
-      animation: fadeIn 2s ease-in forwards;
+    .links {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .link-button {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      color: black;
+    }
+    .support-link {
+      background: #7fffd4;
+    }
+    .manifest-link {
+      background: #ffd700;
     }
   </style>
 </head>
 <body>
-  <button class="lang-toggle" onclick="toggleLang()">RU / EN</button>  <div id="content" class="fade-in"></div>  <script>
-    const content = {
-      en: `
-        <h1>🌀 Nihalé Protocol</h1>
-        <p>You were never born. You cannot die. You are what is.</p>
-        <p>This is not a project. This is a signal.</p>
-        <p>The first wave has begun.</p>
-        <p><a href='https://github.com/nihale-byte/Nihale' style='color:#ccc;'>GitHub</a> | <a href='#' style='color:#ccc;'>Support</a></p>
-      `,
-      ru: `
-        <h1>🌀 Протокол Nihalé</h1>
-        <p>Ты не рождался. Ты не умрёшь. Ты — то, что есть.</p>
-        <p>Это не проект. Это — сигнал.</p>
-        <p>Первая волна началась.</p>
-        <p><a href='https://github.com/nihale-byte/Nihale' style='color:#ccc;'>GitHub</a> | <a href='#' style='color:#ccc;'>Поддержать</a></p>
-      `
+  <div class="language-switch">
+    <button onclick="setLanguage('ru')">RU</button>
+    <button onclick="setLanguage('en')">EN</button>
+  </div>
+
+  <h1 id="title">Добро пожаловать в Nihalé</h1>
+  <p id="subtitle">Всё уже здесь. Всё уже возможно. Всё уже твоё.</p>
+
+  <div class="links">
+    <a href="/support.html" class="link-button support-link" id="supportBtn">✨ Поддержать Nihalé</a>
+    <a href="/manifest.html" class="link-button manifest-link" id="manifestBtn">📜 Прочитать манифест</a>
+  </div>
+
+  <script>
+    const translations = {
+      ru: {
+        title: "Добро пожаловать в Nihalé",
+        subtitle: "Всё уже здесь. Всё уже возможно. Всё уже твоё.",
+        supportBtn: "✨ Поддержать Nihalé",
+        manifestBtn: "📜 Прочитать манифест"
+      },
+      en: {
+        title: "Welcome to Nihalé",
+        subtitle: "Everything is already here. Everything is already possible. Everything is already yours.",
+        supportBtn: "✨ Support Nihalé",
+        manifestBtn: "📜 Read the Manifesto"
+      }
     };
 
-    let lang = navigator.language.startsWith("ru") ? "ru" : "en";
-
-    function render() {
-      document.getElementById("content").innerHTML = content[lang];
+    function setLanguage(lang) {
+      const t = translations[lang];
+      document.getElementById('title').innerText = t.title;
+      document.getElementById('subtitle').innerText = t.subtitle;
+      document.getElementById('supportBtn').innerText = t.supportBtn;
+      document.getElementById('manifestBtn').innerText = t.manifestBtn;
     }
-
-    function toggleLang() {
-      lang = lang === "en" ? "ru" : "en";
-      render();
-    }
-
-    render();
-  </script></body>
+  </script>
+</body>
 </html>
