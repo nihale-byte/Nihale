@@ -60,8 +60,46 @@
       text-decoration: underline;
     }
   </style>
+  <script>
+  const translations = {
+    ru: {
+      title: "Поддержать Nihalé",
+      button: "Скопировать адрес",
+      walletCopied: "Адрес скопирован в буфер обмена!",
+      purpose:
+        "Nihalé собирает средства, чтобы возвращать их туда, где это нужно.\nНе ради выгоды. Не ради славы. Просто потому что мы можем.\nПоддержав нас, ты становишься частью невидимого акта доброты.",
+      back: "← Вернуться на главную"
+    },
+    en: {
+      title: "Support Nihalé",
+      button: "Copy Address",
+      walletCopied: "Address copied to clipboard!",
+      purpose:
+        "Nihalé collects funds to return them where they're needed.\nNot for profit. Not for fame. Just because we can.\nBy supporting us, you become part of an invisible act of kindness.",
+      back: "← Back to home"
+    }
+  };
+
+  function switchLang(lang) {
+    document.querySelector("h1").innerText = translations[lang].title;
+    document.querySelector("button").innerText = translations[lang].button;
+    document.querySelector(".donation-purpose").innerText = translations[lang].purpose;
+    document.querySelector(".back-link").innerText = translations[lang].back;
+
+    // Override alert on copyWallet
+    window.copyWallet = function () {
+      const wallet = document.getElementById("wallet").innerText;
+      navigator.clipboard.writeText(wallet);
+      alert(translations[lang].walletCopied);
+    };
+  }
+  </script>
 </head>
 <body>
+  <div style="position: absolute; top: 20px; right: 20px;">
+  <button onclick="switchLang('ru')">🇷🇺</button>
+  <button onclick="switchLang('en')">🇬🇧</button>
+  </div>
   <h1>Поддержать Nihalé</h1>
   <div class="wallet" id="wallet">
     0x98572A02Ced7113a6B72CBba76fee3B4635F634A
@@ -82,6 +120,9 @@
       navigator.clipboard.writeText(wallet);
       alert("Адрес скопирован в буфер обмена!");
     }
+  </script>
+  <script>
+  switchLang('ru'); // язык по умолчанию
   </script>
 </body>
 </html>
