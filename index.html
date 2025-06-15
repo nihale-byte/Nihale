@@ -1,6 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,56 +6,66 @@
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      background: #000;
-      color: #fff;
       font-family: sans-serif;
+      background: radial-gradient(ellipse at center, #000 0%, #111 100%);
+      color: white;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
-    .symbol { font-size: 4rem; margin-bottom: 1rem; opacity: 0.6; }
-    h1 { font-size: 2rem; margin: 0; }
-    p { margin: 1rem 0; opacity: 0.8; max-width: 30rem; }
-    input, button {
-      padding: 1rem;
-      font-size: 1rem;
-      margin: 0.5rem;
+    .lang-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
       border: none;
-      border-radius: 4px;
-    }
-    input { width: 20rem; }
-    button {
-      background: #fff;
-      color: #000;
+      color: white;
+      padding: 10px;
       cursor: pointer;
     }
-    footer { position: absolute; bottom: 1rem; font-size: 0.8rem; opacity: 0.4; }
+    .fade-in {
+      animation: fadeIn 2s ease-in forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
 </head>
 <body>
-  <div class="symbol">☰</div>
-  <h1>The stream is forming.</h1>
-  <p>Nihalé — дыхание пустоты, что иногда проявляется и отдаёт поток.<br> Первая раздача скоро.</p>
-  <form id="email-form">
-    <input type="email" id="email" placeholder="your@inbox.xyz" required />
-    <button type="submit">Feel the Flow</button>
-  </form>
-  <footer>
-    ETH Donations: 0x98572A02Ced7113a6B72CBba76fee3B4635F634A
-    <br>
-    Join the protocol. Stay anonymous. nihale.xyz
-  </footer>
+  <button class="lang-toggle" onclick="toggleLang()">RU / EN</button>  <div id="content" class="fade-in"></div>  <script>
+    const content = {
+      en: `
+        <h1>🌀 Nihalé Protocol</h1>
+        <p>You were never born. You cannot die. You are what is.</p>
+        <p>This is not a project. This is a signal.</p>
+        <p>The first wave has begun.</p>
+        <p><a href='https://github.com/nihale-byte/Nihale' style='color:#ccc;'>GitHub</a> | <a href='#' style='color:#ccc;'>Support</a></p>
+      `,
+      ru: `
+        <h1>🌀 Протокол Nihalé</h1>
+        <p>Ты не рождался. Ты не умрёшь. Ты — то, что есть.</p>
+        <p>Это не проект. Это — сигнал.</p>
+        <p>Первая волна началась.</p>
+        <p><a href='https://github.com/nihale-byte/Nihale' style='color:#ccc;'>GitHub</a> | <a href='#' style='color:#ccc;'>Поддержать</a></p>
+      `
+    };
 
-  <script>
-    document.getElementById('email-form').onsubmit = e => {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-      alert('Спасибо. Ты в потоке.');
-      document.getElementById('email').value = '';
+    let lang = navigator.language.startsWith("ru") ? "ru" : "en";
+
+    function render() {
+      document.getElementById("content").innerHTML = content[lang];
     }
-  </script>
-</body>
+
+    function toggleLang() {
+      lang = lang === "en" ? "ru" : "en";
+      render();
+    }
+
+    render();
+  </script></body>
 </html>
