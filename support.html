@@ -1,34 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support Nihalé</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Поддержка — Nihalé</title>
   <style>
     body {
-      background: radial-gradient(circle, #0a0a0a, #000000);
+      background-color: #0b0b0b;
+      color: #e5e5e5;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .wallet {
+      font-size: 1rem;
+      word-break: break-all;
+      margin-bottom: 10px;
+      background: #1a1a1a;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    button {
+      background-color: #444;
       color: white;
-      font-family: 'Orbitron', sans-serif;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #666;
+    }
+
+    .donation-purpose {
+      margin-top: 30px;
+      max-width: 600px;
       text-align: center;
-      padding: 50px;
+      line-height: 1.6;
+      font-size: 1.05rem;
+      color: #bbbbbb;
     }
-    img {
-      margin-top: 20px;
-      max-width: 250px;
-    }
-    a {
-      color: #7fffd4;
-      display: block;
+
+    .back-link {
       margin-top: 40px;
-      font-size: 18px;
+      font-size: 0.9rem;
+      color: #888;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>🌀 Support the Wave</h1>
-  <p>ETH Wallet:</p>
-  <p><strong>0x98572A02Ced7113a6B72CBba76fee3B4635F634A</strong></p>
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=ethereum:0x98572A02Ced7113a6B72CBba76fee3B4635F634A" alt="ETH QR Code" />
-  <a href="/">⟵ Return to Portal</a>
+  <h1>Поддержать Nihalé</h1>
+  <div class="wallet" id="wallet">
+    0x98572A02Ced7113a6B72CBba76fee3B4635F634A
+  </div>
+  <button onclick="copyWallet()">Скопировать адрес</button>
+
+  <p class="donation-purpose">
+    Nihalé собирает средства, чтобы возвращать их туда, где это нужно.  
+    Не ради выгоды. Не ради славы. Просто потому что мы можем.  
+    Поддержав нас, ты становишься частью невидимого акта доброты.
+  </p>
+
+  <a href="index.html" class="back-link">← Вернуться на главную</a>
+
+  <script>
+    function copyWallet() {
+      const wallet = document.getElementById("wallet").innerText;
+      navigator.clipboard.writeText(wallet);
+      alert("Адрес скопирован в буфер обмена!");
+    }
+  </script>
 </body>
 </html>
